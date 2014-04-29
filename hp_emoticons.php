@@ -75,9 +75,8 @@ if($is_error){
 	// sort
 	array_multisort($keys ,SORT_ASC,$items);
 
-	// print json
 	$json_response = json_encode( array('items' => $items, 'status' => 'OK') );
-	print $json_response;
 }
+// print json
 print $json_response;
 ?>
