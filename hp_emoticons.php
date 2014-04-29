@@ -1,4 +1,4 @@
-<?php
+NG<?php
 
 /*
  *	Retrieve all emoticons from HipChat:
@@ -29,6 +29,9 @@ $items = array();
 // array for sort
 $keys  = array();
 
+// error
+$is_error = false;
+
 // request url
 $request_url = $api_url . "?" . http_build_query(array(
 	'max-results' => $max_results,
@@ -37,16 +40,18 @@ $request_url = $api_url . "?" . http_build_query(array(
 	'auth_token'  => $token
 ));
 
-// request count
-$request_count = 0;
-
-while( $request_url ){
+while( isset($request_url) ){
 	$context = stream_context_create(array(
     		'http' => array('ignore_errors' => true, 'timeout' => 3)
 	));
 	
-	//print "$request_url<br>";
 	$response = file_get_contents($request_url , false, $context);
+	$pos = strpos($http_response_header[0], '200');	
+	if(!$pos){
+		$is_error = true;
+		break;
+	}
+	
 	$json = json_decode($response, true);
 	$items = array_merge($items, $json['items']);
 	if(count( $json['items']) == $max_results ){
@@ -58,14 +63,21 @@ while( $request_url ){
 		unset($request_url);
 	}
 }
-foreach ( $items as $key=>$val){
-	$keys[$key] = $val['shortcut'];
-}
-array_multisort($keys ,SORT_ASC,$items);
-foreach ( $items as $key=>$val){
-	print "(" . $val['shortcut'] . ")<br>\n";
-}
 
-$json_response = json_encode($items);
-#print $json_response;
+// check error
+if($is_error){
+	$json_response = json_encode( array('items' => array(), 'status' => 'NG') );
+}else{
+	// get keys for sort
+	foreach ( $items as $key=>$val){
+		$keys[$key] = $val['shortcut'];
+	}
+	// sort
+	array_multisort($keys ,SORT_ASC,$items);
+
+	// print json
+	$json_response = json_encode( array('items' => $items, 'status' => 'OK') );
+	print $json_response;
+}
+print $json_response;
 ?>
