@@ -1,4 +1,4 @@
-NG<?php
+<?php
 
 /*
  *	Retrieve all emoticons from HipChat:
