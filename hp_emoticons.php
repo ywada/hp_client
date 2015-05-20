@@ -1,6 +1,6 @@
 <?php
 
-/* test  aaaa
+/* test  aaaa bbbb 
  *	Retrieve all emoticons from HipChat:
  * 
  *		https://www.hipchat.com/docs/apiv2/method/get_all_emoticons
