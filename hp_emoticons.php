@@ -1,11 +1,11 @@
 <?php
 
-/*
+/* test  aaaa bbbb 
  *	Retrieve all emoticons from HipChat:
  * 
  *		https://www.hipchat.com/docs/apiv2/method/get_all_emoticons
  *	
- *	all emoticons are stored in items array.
+ *	all emoticons are stored in items array. TEST
 */
 
 // user token of your account
