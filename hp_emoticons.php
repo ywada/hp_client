@@ -6,6 +6,7 @@
  *		https://www.hipchat.com/docs/apiv2/method/get_all_emoticons
  *	
  *	all emoticons are stored in items array.
+ *
 */
 
 // user token of your account
