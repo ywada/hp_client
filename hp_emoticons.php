@@ -7,6 +7,7 @@
  *	
  *	all emoticons are stored in items array. Test Test bbbbb ccccc ddddd
  *  hoge
+ *  fuga
 */
 
 // user token of your account
